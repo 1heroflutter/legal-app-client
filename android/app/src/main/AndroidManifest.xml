@@ -2,7 +2,7 @@
     <application
         android:label="Giao Thông Đường Bộ"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon"
+        android:icon="@drawable/splash_logo_dark"
         >
         <activity
             android:name=".MainActivity"
