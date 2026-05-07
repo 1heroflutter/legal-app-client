@@ -4,14 +4,6 @@
 
 A modern, intuitive application built with **Flutter**. This project integrates a **Retrieval-Augmented Generation (RAG)** system to provide reliable, source-backed legal consultations. It demonstrates a **Feature-First Architecture** emphasizing scalability, modularity, and maintainability.
 
-## 📸 Screenshots
-
-|             Home Screen              |                   Consultation                    |                  Profile                   |                  Authentication                  |
-|:------------------------------------:|:-------------------------------------------------:|:------------------------------------------:|:---------------------------------------------:|
-| ![Home](assets/screenshots/home.jpg) | ![Consultation](assets/screenshots/consultation.jpg) | ![Profile](assets/screenshots/profile.jpg) | ![Authentication](assets/screenshots/auth.jpg) |
-
-*(Note: Replace placeholder image paths with actual screenshots when available)*
-
 ## ✨ Features
 
 * **Legal AI Assistant**: Get instant, accurate answers to legal queries powered by an advanced RAG model.
