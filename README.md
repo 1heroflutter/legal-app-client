@@ -57,4 +57,4 @@ lib/
 ├── firebase_options.dart # Firebase initialization config
 ├── main.dart           # App Entry point
 └── navigation_menu.dart# Main structural navigation setup
-```
+

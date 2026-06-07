@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class THttpHelper {
   static const String _baseUrl =
-      'https://legal-app-backend-r53p.onrender.com/api';
+      'http://192.168.1.155:5000/api';
 
   // Helper method to make a GET request
   static Future<Map<String, dynamic>> get(String endpoint) async {
@@ -42,10 +42,19 @@ class THttpHelper {
 
   // Handle the HTTP response
   static Map<String, dynamic> _handleResponse(http.Response response) {
+    Map<String, dynamic> body = {};
+    try {
+      body = json.decode(response.body);
+    } catch (_) {
+      // Do nothing if response body is not a valid JSON
+    }
+
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return body;
     } else {
-      throw Exception('Failed to load data: ${response.statusCode}');
+      // Lấy câu trả lời thân thiện (answer) hoặc thông điệp (message) từ backend
+      final friendlyMsg = body['answer'] ?? body['message'] ?? body['error'] ?? 'Đã xảy ra sự cố kết nối (${response.statusCode})';
+      throw Exception(friendlyMsg);
     }
   }
 }
