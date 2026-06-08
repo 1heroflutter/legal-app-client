@@ -15,6 +15,8 @@ class ChatBubble extends StatelessWidget {
     final RenderBox overlay =
         Overlay.of(context).context.findRenderObject() as RenderBox;
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     await showMenu(
       context: context,
       position: RelativeRect.fromRect(
@@ -22,19 +24,19 @@ class ChatBubble extends StatelessWidget {
             const Size(
               40,
               40,
-            ), // smaller rect, the offset is the top-left corner
+            ),
         Offset.zero & overlay.size,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(TSizes.borderRadiusLg),
       ),
-      color: TColors.white,
+      color: isDark ? TColors.darkContainer : TColors.white,
       items: [
         PopupMenuItem(
           value: 'copy',
           child: Row(
             children: [
-              const Icon(Iconsax.copy, size: 18, color: TColors.black),
+              Icon(Iconsax.copy, size: 18, color: isDark ? TColors.white : TColors.black),
               const SizedBox(width: TSizes.sm),
               Text('Sao chép', style: Theme.of(context).textTheme.bodyMedium),
             ],
@@ -44,7 +46,7 @@ class ChatBubble extends StatelessWidget {
           value: 'share',
           child: Row(
             children: [
-              const Icon(Iconsax.share, size: 18, color: TColors.black),
+              Icon(Iconsax.share, size: 18, color: isDark ? TColors.white : TColors.black),
               const SizedBox(width: TSizes.sm),
               Text('Chia sẻ', style: Theme.of(context).textTheme.bodyMedium),
             ],
