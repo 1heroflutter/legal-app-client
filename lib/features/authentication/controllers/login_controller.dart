@@ -47,7 +47,16 @@ class LoginController extends GetxController {
       );
     } catch (e) {
       isLoading.value = false;
-      Get.snackbar('Lỗi', 'Lỗi hệ thống: $e');
+      Get.snackbar(
+        'Lỗi',
+        '',
+        messageText: Text(
+          'Lỗi hệ thống: $e',
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black87),
+        ),
+      );
     }
   }
 
@@ -64,7 +73,16 @@ class LoginController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      Get.snackbar('Lỗi', e.toString());
+      Get.snackbar(
+        'Lỗi',
+        '',
+        messageText: Text(
+          e.toString(),
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Get.isDarkMode ? Colors.white : Colors.black87),
+        ),
+      );
     }
   }
 }

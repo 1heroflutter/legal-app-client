@@ -177,6 +177,7 @@ class ChatScreen extends StatelessWidget {
                   builder: (context, value, child) {
                     return TextField(
                       controller: controller.messageController,
+                      onTapOutside: (event) => FocusScope.of(context).dispose(),
                       decoration: InputDecoration(
                         hintText: 'type_message'.tr,
                         border: InputBorder.none,

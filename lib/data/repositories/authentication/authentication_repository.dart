@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart' as google;
+import 'package:flutter/foundation.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -52,18 +53,23 @@ class AuthenticationRepository extends GetxController {
   // Google Sign-in
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      final google.GoogleSignInAccount? googleUser = await _googleSignIn
-          .signIn();
-      if (googleUser == null) return null;
+      if (kIsWeb) {
+        // Sử dụng Popup native của Firebase cho Web (ổn định hơn nhiều so với package google_sign_in)
+        GoogleAuthProvider authProvider = GoogleAuthProvider();
+        return await _auth.signInWithPopup(authProvider);
+      } else {
+        // Mobile (iOS/Android) vẫn dùng package google_sign_in
+        final google.GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+        if (googleUser == null) return null;
 
-      final google.GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final credentials = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+        final google.GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        final credentials = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-      return await _auth.signInWithCredential(credentials);
+        return await _auth.signInWithCredential(credentials);
+      }
     } catch (e) {
       throw 'Lỗi đăng nhập Google: $e';
     }

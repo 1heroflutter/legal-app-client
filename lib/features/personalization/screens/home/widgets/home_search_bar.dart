@@ -26,6 +26,7 @@ class HomeSearchBar extends StatelessWidget {
             const SizedBox(width: TSizes.spaceBtwItems),
             Expanded(
               child: TextField(
+                onTapOutside: (event) => FocusScope.of(context).dispose(),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'search_hint'.tr,
